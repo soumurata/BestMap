@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <ul class="navbar-nav flex-row ">
+    <li class="nav-item p-3">
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'%>
+    </li>
+    <li class="nav-item p-3">
+      <%= link_to '写真投稿', [:new, :photo], class: 'nav-link' %>
+    </li>
+    <li class="nav-item p-3">
+      <%= link_to 'map', maps_path, class: 'nav-link' %>
+    </li>
+  </ul>
+</nav>
+
+<div class="my-5">
+    <h3>現在いるユーザー</h3>
+</div>
+<div>
+  <% User.all.each do |user| %>
+</div>
+<div class="list-group">
+  <%= link_to user.email, [user],class: 'list-group-item list-group-item-action' %>
+  <% end %>
+</div>
+
+<div class="my-5">
+    <h3>自分の投稿写真</h3>
+</div>
+
+<div class="mx-auto" style="width: 320px;">
+  <% @feeds.each do |photo| %>
+    <div class="card my-3" >
+      <div class="card-img-top">
+        <%= image_tag photo.image, :size =>'320x480'%>
+      </div>
+      <div class="card-body">
+        <div class="card-title">
+          メールアドレス<br>
+          <%= link_to photo.user.email, [photo.user] %>
+        </div>
+        <div class="card-text">
+          <%= photo.caption %>
+        </div>
+        <div>
+          <%= link_to "写真詳細", [photo] ,class: 'btn btn-primary'%>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
