@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   root "home#index"
   devise_for :users
-
+  resource :addresses
+  
   resources :photos do
     resource :like
     resources :comments

@@ -1,3 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <ul class="navbar-nav flex-row ">
+    <li class="nav-item p-3">
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'%>
+    </li>
+    <li class="nav-item p-3">
+      <%= link_to '写真投稿', [:new, :photo], class: 'nav-link' %>
+    </li>
+    <li class="nav-item p-3">
+      <%= link_to 'map', maps_path, class: 'nav-link' %>
+    </li>
+    <li class="nav-item p-3">
+      <%= link_to 'ホーム', root_path, class: 'nav-link' %>
+    </li>
+  </ul>
+</nav>
+
 
 <h2>gmap</h2>
 <input id="address" type="textbox" value="宮の沢">
@@ -15,7 +33,7 @@
 
 <script>
 let map
-// let geocoder
+let geocoder
 // 下の1行を追加
 const display = document.getElementById('display')
 
@@ -23,22 +41,22 @@ function initMap(){
   geocoder = new google.maps.Geocoder()
 
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 40.7828, lng:-73.9653},
-    zoom: 12,
+    center: {lat: 43.082803, lng:141.2522387},
+    zoom: 16,
   });
 
   marker = new google.maps.Marker({
-    position:  {lat: 40.7828, lng:-73.9653},
+    position:  {lat: 43.082803, lng:141.2522387},
     map: map
   });
 }
 
-let geocoder
+
 
 function codeAddress(){
   let inputAddress = document.getElementById('address').value;
 
-  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+  geocoder.geocode( { 'address': inputAddress, 'region': 'jp'}, function(results, status) {
     if (status == 'OK') {
       map.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({
