@@ -1,22 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <ul class="navbar-nav flex-row ">
-    <li class="nav-item p-3">
-      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'%>
-    </li>
-    <li class="nav-item p-3">
-      <%= link_to '写真投稿', [:new, :photo], class: 'nav-link' %>
-    </li>
-    <li class="nav-item p-3">
-      <%= link_to 'map', maps_path, class: 'nav-link' %>
-    </li>
-    <li class="nav-item p-3">
-      <%= link_to 'ホーム', root_path, class: 'nav-link' %>
-    </li>
-  </ul>
-</nav>
-
-
+<%= render 'shared/form' %>
 
 <div class="box">
   <%= form_with model: @photo, local: true do |f| %>

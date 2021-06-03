@@ -1,21 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <ul class="navbar-nav flex-row ">
-    <li class="nav-item p-3">
-      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'%>
-    </li>
-    <li class="nav-item p-3">
-      <%= link_to '写真投稿', [:new, :photo], class: 'nav-link' %>
-    </li>
-    <li class="nav-item p-3">
-      <%= link_to 'map', maps_path, class: 'nav-link' %>
-    </li>
-    <li class="nav-item p-3">
-      <%= link_to 'ホーム', root_path, class: 'nav-link' %>
-    </li>
-  </ul>
-</nav>
 
+<%= render 'shared/form' %>
 
 <h2>gmap</h2>
 <input id="address" type="textbox" value="宮の沢">
@@ -34,6 +18,8 @@
 <script>
 let map
 let geocoder
+var Lat
+var Lng
 // 下の1行を追加
 const display = document.getElementById('display')
 
@@ -51,8 +37,6 @@ function initMap(){
   });
 }
 
-
-
 function codeAddress(){
   let inputAddress = document.getElementById('address').value;
 
@@ -63,6 +47,8 @@ function codeAddress(){
           map: map,
           position: results[0].geometry.location
       });
+      Lat= Marker.getPosition().lat();
+      Lng = Marker.getPosition().lng();
       display.textContent = "検索結果：" + results[ 0 ].geometry.location
     } else {
       alert('該当する結果がありませんでした：' + status);
@@ -73,3 +59,13 @@ function codeAddress(){
 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-wxITLM8STxq0jxLCrCUeVkqjknqax2k&callback=initMap" async defer></script>
+
+
+
+
+  <%= form_with model: @address, local: true do |f| %>
+    <%# <%= f.hidden_field :lat, value: Lat %>
+    <%# <%= f.hidden_field :lng, value: Lng %>
+    <%= f.text_area :name %>
+  <%= f.submit %>
+  <% end %>
