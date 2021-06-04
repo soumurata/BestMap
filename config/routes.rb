@@ -2,8 +2,7 @@ Rails.application.routes.draw do
 
   root "home#index"
   devise_for :users
-  resource :addresses
-  
+
   resources :photos do
     resource :like
     resources :comments
@@ -16,6 +15,6 @@ Rails.application.routes.draw do
     resources :likes
   end
 
-  resources :maps, only: [:index]
+  resources :maps, only: [:index, :create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

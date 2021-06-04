@@ -66,3 +66,4 @@ gem 'devise'
 gem "bulma-rails"
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
+gem 'geocoder', '~> 1.6', '>= 1.6.7'
