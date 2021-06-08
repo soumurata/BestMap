@@ -7,7 +7,8 @@ class Map < ApplicationRecord
   # バリデーションの前に送信されたaddressの値によってジオコーディング(緯度経度の算出)を行う
   geocoded_by :address
   before_validation :geocode
-
-  # reverse_geocoded_by :latitude, :longitude
-  # after_validation :reverse_geocode
+  # after_validation :geocode, if: :address_changed?
+  
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode
 end

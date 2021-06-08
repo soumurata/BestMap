@@ -1,16 +1,14 @@
 Geocoder.configure(
-
-    # street address geocoding service (default :nominatim)
     lookup: :google,
-
-    # to use an API key:
-    api_key: "AIzaSyB-wxITLM8STxq0jxLCrCUeVkqjknqax2k",
-
-    # geocoding service request timeout, in seconds (default 3):
-    timeout: 5,
-
-    # set default units to kilometers:
-    units: :km
+     always_raise: [
+       Geocoder: :OverQueryLimitError,
+       # Geocoder: :RequestDenied,
+       # Geocoder: :InvalidRequest,
+       # Geocoder: :InvalidApiKey,
+       language: :en
+     ],
+     api_key:  'AIzaSyB-wxITLM8STxq0jxLCrCUeVkqjknqax2k',
+     use_https: true
 
 )
   # Geocoding options
