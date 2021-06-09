@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_08_153937) do
+ActiveRecord::Schema.define(version: 2021_06_09_130110) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(version: 2021_06_08_153937) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_maps_on_user_id"
   end
 
   create_table "photos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -105,5 +107,6 @@ ActiveRecord::Schema.define(version: 2021_06_08_153937) do
   add_foreign_key "follows", "users"
   add_foreign_key "likes", "photos"
   add_foreign_key "likes", "users"
+  add_foreign_key "maps", "users"
   add_foreign_key "photos", "users"
 end

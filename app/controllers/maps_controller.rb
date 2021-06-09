@@ -1,12 +1,13 @@
 class MapsController < ApplicationController
   def index
     # このあとで@mapに関するフォームを作るので、Mapインスタンスを作っておきます(でないとエラーになる)
-    @map = Map.new
+    @map = current_user.maps.new
     @maps = Map.all
+    @feeds_map = Map.where(user_id: [current_user.id, *current_user.following_ids]).order(created_at: :desc)
   end
 
   def create
-    @map = Map.new(map_params)
+    @map = current_user.maps.new(map_params)
     if @map.save
       redirect_to maps_url
     else

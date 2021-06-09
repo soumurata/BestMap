@@ -8,7 +8,9 @@ class Map < ApplicationRecord
   geocoded_by :address
   before_validation :geocode
   # after_validation :geocode, if: :address_changed?
-  
+
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
+
+  belongs_to :user
 end
