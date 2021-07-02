@@ -3,7 +3,8 @@ class MapsController < ApplicationController
     # このあとで@mapに関するフォームを作るので、Mapインスタンスを作っておきます(でないとエラーになる)
     @map = current_user.maps.new
     @maps = Map.all
-    @feeds_map = Map.where(user_id: [current_user.id, *current_user.following_ids]).order(created_at: :desc)
+    @feeds_map = Map.where(user_id: [*current_user.following_ids]).order(created_at: :desc)
+    @my_map = Map.where(user_id: current_user.id).order(created_at: :desc)
   end
 
   def create
@@ -14,6 +15,9 @@ class MapsController < ApplicationController
       @maps = Map.all
       render 'maps/index'
     end
+  end
+  def show
+    @map = Map.find(params[:id])
   end
 
   private

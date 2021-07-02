@@ -1,10 +1,10 @@
 
 <%= render 'shared/form' %>
 
-<div class="gmap">
+<div class="map">
   <h2>gmap</h2>
 
-  <input id="address" type="textbox" value="Sydney, NSW">
+  <input id="address" type="textbox" value="札幌駅">
   <input type="button" value="検索" onclick="codeAddress()">
 
   <!-- 地図情報を保存するフォーム -->
@@ -19,31 +19,60 @@
   <% end %>
   <div id='map'>
   </div>
-  <%= render @feeds_map %>
+  <div class="X">
+<h1>みんなのマップ</h1>
+<div class="d-flex justify-content-around">
+  <div class="m-2">
+    <h2>mymap</h2>
+  </div>
+  <div class="m-2">
+    <h2>friendsmap</h2>
+  </div>
+
 </div>
-<style>
-#map {
-  height: 600px;
-  width: 600px;
-}
-</style>
+<div class="maplist">
+  <div class="mymap">
+    <ul class="SG">
+      <%= render @my_map %>
+    </ul>
+  </div>
+  <div class="friendsmap">
+    <ul class="SG">
+      <%= render @feeds_map %>
+    </ul>
+  </div>
+</div>
+<h2>By @mura_so</h2>
+<h2>村田創</h2>
+</div>
+  <style>
+    #map {
+      height: 600px;
+      width: 600px;
+    }
+  </style>
+</div>
 
 <script>
-  let map
   let geocoder
   // 変数を追加
+  let mapInstance
+
   let marker
 
-  function initMap() {
-    geocoder = new google.maps.Geocoder()
 
-    // 変数の名前をmapInstanceに変更、デフォルト位置を東京に変更
+  function initMap() {
+
+
+
+    geocoder = new google.maps.Geocoder();
+
+
+    // 変数の名前をmapInstanceに変更、デフォルト位置をに変更
     mapInstance = new google.maps.Map(document.getElementById('map'), {
-      center: {
-        lat: 43.068661,
-        lng: 141.350755
-      },
-      zoom: 16
+      center: {lat: 43.068661,lng: 141.350755},
+      zoom: 16,
+      mapId: '59ee39418a302aff'
     });
 
     // 保存された地図情報からピンをさす
@@ -62,9 +91,11 @@
     }
     });
     <% end %>
-  }
+  };
+
 
   function codeAddress() {
+
     let inputAddress = document.getElementById('address').value;
 
     geocoder.geocode({
@@ -97,5 +128,6 @@
       }
     });
   }
+
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-wxITLM8STxq0jxLCrCUeVkqjknqax2k&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-wxITLM8STxq0jxLCrCUeVkqjknqax2k&callback=initMap&map_id=59ee39418a302aff" async defer></script>

@@ -1,0 +1,59 @@
+
+<%= render 'shared/form' %>
+
+<div class="map">
+  <h2>詳細画面</h2>
+
+  <input id="address" type="textbox" value=<%= @map.title %>>
+
+
+  <div id='map'>
+  </div>
+  <script>
+
+  </script>
+  <%= render @map %>
+  <style>
+    #map {
+      height: 600px;
+      width: 600px;
+    }
+
+  </style>
+</div>
+
+<script>
+ initMap();
+  function initMap() {
+    // 変数を追加
+    let marker
+    let mapInstance
+
+
+    if(marker != null){
+    marker.setMap(null);
+    }
+    marker = null;
+
+
+    // 変数の名前をmapInstanceに変更、デフォルト位置をに変更
+    mapInstance = new google.maps.Map(document.getElementById('map'), {
+      center: {
+        lat: <%= @map.latitude %>,
+        lng: <%= @map.longitude %>
+      },
+      zoom: 16,
+      mapId: '59ee39418a302aff'
+    });
+
+      marker = new google.maps.Marker({
+      map:mapInstance,
+      position: new google.maps.LatLng(<%= @map.latitude %>, <%= @map.longitude %>),
+      icon: {
+      url: ' https://maps.google.com/mapfiles/ms/icons/blue-dot.png', //アイコンのURL
+      scaledSize: new google.maps.Size(40, 40) //サイズ
+    }
+  });
+
+  };
+</script>

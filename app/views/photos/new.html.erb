@@ -1,14 +1,15 @@
 <%= render 'shared/form' %>
-
-<div class="box">
-  <%= form_with model: @photo, local: true do |f| %>
-  <h1>写真投稿</h1>
-  <div class="card mb-4">
-    <%= f.file_field :image %>
+<div class="Form">
+  <div class="box">
+    <%= form_with model: @photo, local: true do |f| %>
+    <h1>写真投稿</h1>
+    <div class="card mb-4">
+      <%= f.file_field :image %>
+    </div>
+    <div>
+      <%= f.text_area :caption %>
+    </div>
+    <%= f.submit %>
+    <% end %>
   </div>
-  <div>
-    <%= f.text_area :caption %>
-  </div>
-  <%= f.submit %>
-  <% end %>
 </div>
