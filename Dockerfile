@@ -16,4 +16,5 @@ ADD ./Gemfile.lock $APP_ROOT/Gemfile.lock
 
 # Gemfileのbundle install
 RUN bundle install
+RUN apt-get update && apt-get -y install vim
 ADD . $APP_ROOT
