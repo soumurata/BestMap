@@ -18,7 +18,7 @@ services:
     links:
       - db
 
-default: &default
+  default: &default
   adapter: postgresql
   encoding: unicode
   host: db
@@ -26,7 +26,7 @@ default: &default
   password:
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-production:
+  production:
   <<: *default
   host: <%= Rails.application.credentials.rds[:host] %>
   database: <%= Rails.application.credentials.rds[:database] %>
