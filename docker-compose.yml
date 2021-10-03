@@ -8,12 +8,12 @@ services:
     command: bundle exec puma -C config/puma.rb
 # ======================================
     volumes:
-      - .:/fitO2
-      - public-data:/fitO2/public
-      - tmp-data:/fitO2/tmp
-      - log-data:/fitO2/log
+      - .:/BestMap
+      - public-data:/BestMap/public
+      - tmp-data:/BestMap/tmp
+      - log-data:/BestMap/log
     networks:
-      - fitO2-network
+      - BestMap-network
 # =========ローカルと本番切り替え===========
     depends_on:
       - db
@@ -24,25 +24,25 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-      MYSQL_DATABASE: fitO2_development
+      MYSQL_DATABASE: BestMap_development
     volumes:
       - db-data:/var/lib/mysql
     networks:
-      - fitO2-network
+      - BestMap-network
 # ======================================
 
   web:
     build:
       context: ./nginx_docker
     volumes:
-      - public-data:/fitO2/public
-      - tmp-data:/fitO2/tmp
+      - public-data:/BestMap/public
+      - tmp-data:/BestMap/tmp
     ports:
       - 80:80
     depends_on:
       - app
     networks:
-      - fitO2-network
+      - BestMap-network
 volumes:
   public-data:
 
@@ -51,5 +51,5 @@ volumes:
   db-data:
 
 networks:
-  fitO2-network:
+  BestMap-network:
     external: true
